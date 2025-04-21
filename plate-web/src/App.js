@@ -73,11 +73,11 @@ const App = () => {
           <div style={{ display: "flex", gap: 20 }}>
             <div>
               <p>원본 이미지</p>
-              <img src={imagePreview} width={300} alt="original" />
+              <img src={imagePreview} width={300} alt="업로드된 원본 이미지" />
             </div>
             <div>
               <p>번호판 인식 결과</p>
-              <img src={resultImage} width={300} alt="result" />
+              <img src={resultImage} width={300} alt="OCR 처리된 이미지" />
               <p><strong>Label:</strong> {label}</p>
             </div>
           </div>
@@ -90,7 +90,11 @@ const App = () => {
         <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
           {samples.map((sample, idx) => (
             <div key={idx}>
-              <img src={`http://127.0.0.1:5050/api/image/${sample.result_url.split('/').pop()}`} width={200} />
+              <img
+                src={`http://127.0.0.1:5050/api/image/${sample.result_url.split('/').pop()}`}
+                width={200}
+                alt={`샘플 ${idx + 1} 결과 이미지`}
+              />
               <p>{sample.label}</p>
             </div>
           ))}
