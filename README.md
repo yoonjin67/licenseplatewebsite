@@ -5,7 +5,8 @@ AI 기반 차량 번호판 인식 시스템
 
 ---
 
-licenseplate/
+licenseplate
+
 ├── images/           # 테스트용 원본 이미지 저장 폴더  
 ├── models/           # 학습된 모델 파일들 (YOLOv5, CRNN, CRAFT 등)  
 ├── res_web/          # 인식 결과 이미지 저장 폴더  
