@@ -63,6 +63,8 @@ def draw_text_with_pil(image, text, position, font_path='NanumGothic-Bold.ttf', 
 # ---------------------------------------------
 if __name__ == '__main__':
     device = 'cpu'
+    if torch.cuda.is_available():
+        device = 'cuda'
     model = DetectMultiBackend(ROOT / 'best.pt', device=device)
 
     with open(RES_DIR / 'recognition_results.csv', 'w', newline='', encoding='utf-8-sig') as f:

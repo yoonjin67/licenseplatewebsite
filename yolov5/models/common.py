@@ -481,7 +481,7 @@ class DetectMultiBackend(nn.Module):
         fp16 &= pt or jit or onnx or engine or triton  # FP16
         nhwc = coreml or saved_model or pb or tflite or edgetpu  # BHWC formats (vs torch BCWH)
         stride = 32  # default stride
-        cuda = torch.cuda.is_available() and device.type != "cpu"  # use CUDA
+        cuda = torch.cuda.is_available() and device != "cpu"  # use CUDA
         if not (pt or triton):
             w = attempt_download(w)  # download if not local
 

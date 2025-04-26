@@ -18,7 +18,10 @@ from utils.general import non_max_suppression
 from utils.augmentations import letterbox
 
 reader = easyocr.Reader(['ko', 'en'], gpu=False)
-model = DetectMultiBackend(MODEL_PATH, device='cpu')
+device = 'cpu'
+if torch.cuda.is_available():
+    device = 'cuda'
+model = DetectMultiBackend(MODEL_PATH, device=device)
 
 def scale_coords(img1_shape, coords, img0_shape, ratio_pad=None):
     if ratio_pad is None:
