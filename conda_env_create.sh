@@ -1,2 +1,2 @@
 #!/bin/bash
-conda create -n yolo python=3.9
+conda create -n yolo python=3.11

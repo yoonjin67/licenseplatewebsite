@@ -2,6 +2,7 @@ blinker
 Brotli
 certifi
 cffi
+cython
 charset-normalizer
 click
 coloredlogs==15.0.1
@@ -36,7 +37,7 @@ networkx
 ninja
 numpy==2.0.2
 onnx
-onnxruntime==1.19.2
+onnxruntime
 opencv-python
 opencv-python-headless
 packaging==24.2
