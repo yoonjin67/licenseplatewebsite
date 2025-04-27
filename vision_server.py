@@ -97,7 +97,7 @@ def process_image(image_path):
             det[:, :4] = scale_coords(img.shape[2:], det[:, :4], img0.shape).round()
             x1_base, y1_base, x2_base, y2_base = map(int, det[0][:4])
 
-            pad = 1
+            pad = 2
             for dx1 in range(-pad, pad + 1):
                 for dy1 in range(-pad, pad + 1):
                     for dx2 in range(-pad, pad + 1):
@@ -119,30 +119,30 @@ def process_image(image_path):
                                     if match:
                                         result_list = list(text)
                                         valid_mid_chars = "가나다라마거너더러머버서어저고노도로모보소오조구누두루무부수우주바사아자외하허호배"
-                                        best_restore_idx = -1
+                                        valid_mids = list(valid_mid_chars) 
+                                        best_restore_idx = -10000
                                         best_restore = ''
                                         best_dist = 10000
 
+                                        print("text:" , text)
                                         for idx, char in enumerate(result_list):
-                                            if unicodedata.category(char) != 'Nd':
+                                            if unicodedata.category(char) != 'Nd' and char not in valid_mids:
                                                 current_chosung = get_chosung(char)
                                                 current_jungsung = get_jungsung(char)
-                                                current_jongsung = get_jongsung(char)
 
                                                 for v in valid_mid_chars:
                                                     valid_chosung = get_chosung(v)
                                                     valid_jungsung = get_jungsung(v)
-                                                    valid_jongsung = get_jongsung(v)
 
                                                     if current_chosung == valid_chosung:
-                                                        dist = abs(current_jungsung - valid_jungsung) + abs(current_jongsung - valid_jongsung)
-                                                        if dist < best_dist:
+                                                        dist = current_jungsung - valid_jungsung
+                                                        if dist < best_dist and current_jungsung - valid_jungsung > 0:
                                                             best_dist = dist
                                                             best_restore = v
                                                             best_restore_idx = idx
 
-                                        if best_restore_idx != -1:
-                                            result_list[best_restore_idx] = best_restore
+                                            if best_restore_idx != -10000:
+                                                result_list[best_restore_idx] = best_restore
 
                                         corrected_result = "".join(result_list)
                                         print(f"Pad: ({dx1}, {dy1}, {dx2}, {dy2}), OCR: {corrected_result}")
