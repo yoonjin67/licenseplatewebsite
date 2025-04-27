@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Webcam from 'react-webcam';
 
+const serverIP = "192.168.0.2";
 const App = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [resultImage, setResultImage] = useState(null);
@@ -16,7 +17,7 @@ const App = () => {
 
   const fetchSamples = async () => {
     try {
-      const res = await axios.get("http://127.0.0.1:5050/api/samples");
+      const res = await axios.get(`http://${serverIP}:5050/api/samples`);
       setSamples(res.data);
     } catch (err) {
       console.error("샘플 이미지 불러오기 실패:", err);
@@ -30,9 +31,9 @@ const App = () => {
     const formData = new FormData();
     formData.append("file", file);
     setLoading(true);
-    const res = await axios.post("http://127.0.0.1:5050/api/upload", formData);
+    const res = await axios.post(`http://${serverIP}:5050/api/upload`, formData);
     setLabel(res.data.label);
-    setResultImage("http://127.0.0.1:5050" + res.data.result_path);
+    setResultImage(`http://${serverIP}:5050` + res.data.result_path);
     setImagePreview(URL.createObjectURL(file));
     setLoading(false);
   };
@@ -45,9 +46,9 @@ const App = () => {
     const formData = new FormData();
     formData.append("file", file);
     setLoading(true);
-    const res = await axios.post("http://127.0.0.1:5050/api/upload", formData);
+    const res = await axios.post(`http://${serverIP}:5050/api/upload`, formData);
     setLabel(res.data.label);
-    setResultImage("http://127.0.0.1:5050" + res.data.result_path);
+    setResultImage(`http://${serverIP}:5050` + res.data.result_path);
     setImagePreview(imageSrc);
     setLoading(false);
   };
@@ -91,7 +92,7 @@ const App = () => {
           {samples.map((sample, idx) => (
             <div key={idx}>
               <img
-                src={`http://127.0.0.1:5050/api/image/${sample.result_url.split('/').pop()}`}
+                src={`http://${serverIP}:5050/api/image/${sample.result_url.split('/').pop()}`}
                 width={200}
                 alt={`샘플 ${idx + 1} 결과 이미지`}
               />
