@@ -1,4 +1,4 @@
-// detect_plate4.py (번호판 전체 OCR 기반 - EasyOCR + 한글 표시 지원)
+# detect_plate4.py (번호판 전체 OCR 기반 - EasyOCR + 한글 표시 지원)
 import sys
 import os
 import cv2
@@ -46,7 +46,7 @@ scale_coords_fn = scale_coords
 # ---------------------------------------------
 # EasyOCR 설정
 # ---------------------------------------------
-reader = easyocr.Reader(['ko', 'en'], gpu=False)
+reader = easyocr.Reader(['ko', 'en'], gpu=False) # 필요에 따라 True로 변경 가능
 
 # ---------------------------------------------
 # OpenCV 이미지에 한글 텍스트를 넣는 함수
@@ -66,6 +66,7 @@ if __name__ == '__main__':
     if torch.cuda.is_available():
         device = 'cuda'
     model = DetectMultiBackend(ROOT / 'best.pt', device=device)
+    model.to(device) # 모델을 해당 장치로 이동
 
     with open(RES_DIR / 'recognition_results.csv', 'w', newline='', encoding='utf-8-sig') as f:
         writer = csv.writer(f)
@@ -78,7 +79,7 @@ if __name__ == '__main__':
         img = img.transpose((2, 0, 1))[::-1]
         img = np.ascontiguousarray(img)
         img = torch.from_numpy(img).float() / 255.0
-        img = img.unsqueeze(0)
+        img = img.unsqueeze(0).to(device) # 이미지 텐서를 해당 장치로 이동
 
         pred = model(img)
         pred = non_max_suppression(pred, 0.3, 0.45)
@@ -91,6 +92,7 @@ if __name__ == '__main__':
                     x1, y1, x2, y2 = map(int, xyxy)
                     crop = img0[y1:y2, x1:x2]
                     gray = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
+                    gray = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 20, 7)
                     ocr_results = reader.readtext(gray, detail=0)
                     raw_text = ''.join(ocr_results)
                     text = re.sub(r'[^0-9가-힣]', '', raw_text)
@@ -107,4 +109,3 @@ if __name__ == '__main__':
         with open(RES_DIR / 'recognition_results.csv', 'a', newline='', encoding='utf-8-sig') as f:
             writer = csv.writer(f)
             writer.writerow([img_path.name, label_text])
-

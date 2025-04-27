@@ -22,6 +22,7 @@ device = 'cpu'
 if torch.cuda.is_available():
     device = 'cuda'
 model = DetectMultiBackend(MODEL_PATH, device=device)
+model.to(device)
 
 def scale_coords(img1_shape, coords, img0_shape, ratio_pad=None):
     if ratio_pad is None:
@@ -52,7 +53,7 @@ def process_image(image_path):
     img = img.transpose((2, 0, 1))[::-1]
     img = np.ascontiguousarray(img)
     img = torch.from_numpy(img).float() / 255.0
-    img = img.unsqueeze(0)
+    img = img.unsqueeze(0).to(device)
 
     pred = model(img)
     pred = non_max_suppression(pred, 0.3, 0.45)
