@@ -38,3 +38,6 @@ AI 서버를 별도로 배포(예: AWS, Render, Railway, PythonAnywhere 등)
 👉 따라서 실제 AI OCR 기능을 사용하려면 Flask API 서버와 함께 사용해야 합니다.
 
 
+### 브랜치 참고 사항
+이것은 Apple Neural Engine, AsahiLinux Kernel 상에서 anecc를 이용해 *.anec 모델로 동작하는 브랜치입니다.
+일반적인 macos에선 활용할 수 없습니다.
