@@ -30,7 +30,8 @@ try:
 except ImportError:
     comet_ml = None
 
-import numpy as np
+import ane
+from ane import np
 import torch
 import torch.distributed as dist
 import torch.nn as nn

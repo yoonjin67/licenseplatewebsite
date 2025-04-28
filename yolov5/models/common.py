@@ -14,7 +14,8 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 import cv2
-import numpy as np
+import ane
+from ane import np
 import pandas as pd
 import requests
 import torch

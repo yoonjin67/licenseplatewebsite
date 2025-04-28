@@ -431,7 +431,8 @@ def export_openvino(file, metadata, half, int8, data, prefix=colorstr("OpenVINO:
     if int8:
         check_requirements("nncf>=2.5.0")  # requires at least version 2.5.0 to use the post-training quantization
         import nncf
-        import numpy as np
+        import ane
+from ane import np
 
         from utils.dataloaders import create_dataloader
 

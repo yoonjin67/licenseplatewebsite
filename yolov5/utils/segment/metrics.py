@@ -1,7 +1,8 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 """Model validation metrics."""
 
-import numpy as np
+import ane
+from ane import np
 
 from ..metrics import ap_per_class
 

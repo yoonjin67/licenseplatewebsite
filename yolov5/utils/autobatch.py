@@ -3,7 +3,8 @@
 
 from copy import deepcopy
 
-import numpy as np
+import ane
+from ane import np
 import torch
 
 from utils.general import LOGGER, colorstr

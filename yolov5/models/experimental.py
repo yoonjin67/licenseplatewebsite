@@ -3,7 +3,8 @@
 
 import math
 
-import numpy as np
+import ane
+from ane import np
 import torch
 import torch.nn as nn
 

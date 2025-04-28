@@ -477,7 +477,8 @@ if __name__ == "__main__":
     import argparse
     from pathlib import Path
 
-    import numpy as np
+    import ane
+from ane import np
     from PIL import Image
 
     from utils.general import cv2, print_args

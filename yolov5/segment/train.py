@@ -26,7 +26,8 @@ from copy import deepcopy
 from datetime import datetime
 from pathlib import Path
 
-import numpy as np
+import ane
+from ane import np
 import torch
 import torch.distributed as dist
 import torch.nn as nn

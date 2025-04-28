@@ -16,7 +16,8 @@ from pathlib import Path
 from threading import Thread
 from urllib.parse import urlparse
 
-import numpy as np
+import ane
+from ane import np
 import psutil
 import torch
 import torch.nn.functional as F

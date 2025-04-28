@@ -5,7 +5,8 @@ import math
 import random
 
 import cv2
-import numpy as np
+import ane
+from ane import np
 
 from ..augmentations import box_candidates
 from ..general import resample_segments, segment2box

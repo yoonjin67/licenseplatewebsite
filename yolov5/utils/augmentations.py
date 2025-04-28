@@ -5,7 +5,8 @@ import math
 import random
 
 import cv2
-import numpy as np
+import ane
+from ane import np
 import torch
 import torchvision.transforms as T
 import torchvision.transforms.functional as TF

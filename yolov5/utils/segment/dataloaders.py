@@ -5,7 +5,8 @@ import os
 import random
 
 import cv2
-import numpy as np
+import ane
+from ane import np
 import torch
 from torch.utils.data import DataLoader
 

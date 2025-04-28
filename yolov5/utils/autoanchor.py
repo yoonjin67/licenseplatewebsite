@@ -3,7 +3,8 @@
 
 import random
 
-import numpy as np
+import ane
+from ane import np
 import torch
 import yaml
 from tqdm import tqdm

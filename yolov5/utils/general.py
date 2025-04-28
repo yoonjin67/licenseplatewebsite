@@ -27,7 +27,8 @@ from typing import Optional
 from zipfile import ZipFile, is_zipfile
 
 import cv2
-import numpy as np
+import ane
+from ane import np
 import pandas as pd
 import pkg_resources as pkg
 import torch

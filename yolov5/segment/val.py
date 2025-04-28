@@ -28,7 +28,8 @@ import sys
 from multiprocessing.pool import ThreadPool
 from pathlib import Path
 
-import numpy as np
+import ane
+from ane import np
 import torch
 from tqdm import tqdm
 

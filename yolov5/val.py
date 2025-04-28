@@ -26,7 +26,8 @@ import subprocess
 import sys
 from pathlib import Path
 
-import numpy as np
+import ane
+from ane import np
 import torch
 from tqdm import tqdm
 

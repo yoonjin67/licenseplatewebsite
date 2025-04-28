@@ -1,7 +1,8 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 
 import cv2
-import numpy as np
+import ane
+from ane import np
 import torch
 import torch.nn.functional as F
 
